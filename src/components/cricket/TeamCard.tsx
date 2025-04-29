@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +24,8 @@ const TeamCard: React.FC<TeamCardProps> = ({ team }) => {
           <img 
             src={team.logo} 
             alt={team.name} 
-            className="h-16 w-16 object-contain"
+            className="h-16 w-16 object-contain p-1"
+            style={{ maxWidth: '100%', maxHeight: '100%' }}
             onError={(e) => {
               e.currentTarget.src = "https://via.placeholder.com/150?text=" + team.shortName;
             }}

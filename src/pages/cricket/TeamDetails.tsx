@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -38,11 +37,12 @@ const TeamDetails: React.FC = () => {
         ) : team ? (
           <>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="w-20 h-20 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center">
+              <div className="w-24 h-24 rounded-full overflow-hidden bg-white shadow-md flex items-center justify-center p-2">
                 <img 
                   src={team.logo} 
                   alt={team.name} 
-                  className="w-16 h-16 object-contain"
+                  className="w-full h-full object-contain"
+                  style={{ maxWidth: '100%', maxHeight: '100%' }}
                   onError={(e) => {
                     e.currentTarget.src = "https://via.placeholder.com/150?text=" + team.shortName;
                   }}
