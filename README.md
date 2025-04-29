@@ -10,7 +10,7 @@ There are several ways of editing your application.
 
 **Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a6672b72-c3b4-48a6-a19a-a36aeb89da5f) and start prompting.
+Simply visit the [Lovable Project](https://fit-forge-gemini-verse-54.lovable.app/) and start prompting.
 
 Changes made via Lovable will be committed automatically to this repo.
 
