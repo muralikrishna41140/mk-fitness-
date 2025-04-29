@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import PageLayout from '@/components/layout/PageLayout';
 import WorkoutCard from '@/components/workouts/WorkoutCard';
 import { Button } from '@/components/ui/button';
@@ -58,10 +57,6 @@ const Workouts: React.FC = () => {
 
   return (
     <PageLayout>
-      <Helmet>
-        <title>Workouts | FitForge</title>
-      </Helmet>
-      
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
