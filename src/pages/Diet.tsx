@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import MealPlanCard from '@/components/diet/MealPlanCard';
@@ -195,7 +194,7 @@ const Diet: React.FC = () => {
                 protein="140g"
                 carbs="50g"
                 fat="120g"
-                imageUrl="https://images.unsplash.com/photo-1519708227418-c8b39e2a042b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                imageUrl="https://tse4.mm.bing.net/th?id=OIP.INxkaRCbDxzB-s-AcW-U6QHaE8&pid=Api&P=0&h=180"
                 dietType="Low Carb"
               />
               <MealPlanCard
@@ -232,7 +231,7 @@ const Diet: React.FC = () => {
                 protein="140g"
                 carbs="50g"
                 fat="120g"
-                imageUrl="https://images.unsplash.com/photo-1519708227418-c8b39e2a042b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+                imageUrl="https://tse4.mm.bing.net/th?id=OIP.INxkaRCbDxzB-s-AcW-U6QHaE8&pid=Api&P=0&h=180"
                 dietType="Low Carb"
               />
             </div>

@@ -35,7 +35,7 @@ const Challenges: React.FC = () => {
                 participants={248}
                 progress={65}
                 daysLeft={12}
-                imageUrl="https://img.freepik.com/free-photo/full-shot-woman-running-outdoors_23-2149872579.jpg?size=626&ext=jpg"
+                imageUrl="https://tse2.mm.bing.net/th?id=OIP.T6z9vkOons7GTvPmjmVjCQHaE8&pid=Api&P=0&h=180"
                 type="solo"
               />
               <ChallengeCard
