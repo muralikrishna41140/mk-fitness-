@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
     <aside className="hidden md:flex flex-col w-64 border-r border-slate-200 h-screen sticky top-0 p-4 bg-white/50 backdrop-blur-sm">
       <div className="flex-1 py-6 flex flex-col gap-1">
         <p className="text-xs font-semibold text-gray-500 px-3 py-2 uppercase">Main Menu</p>
-        <SidebarLink to="/" icon={Home} label="Dashboard" />
+        <SidebarLink to="/dashboard" icon={Home} label="Dashboard" />
         <SidebarLink to="/challenges" icon={Trophy} label="Challenges" />
         <SidebarLink to="/workouts" icon={Dumbbell} label="Workouts" />
         <SidebarLink to="/diet" icon={Apple} label="Diet Plans" />

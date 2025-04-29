@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare, Menu, X } from 'lucide-react';
+import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
@@ -38,7 +38,7 @@ const MobileNav: React.FC = () => {
     <>
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50">
         <div className="grid grid-cols-5 h-16">
-          <NavItem to="/" icon={Home} label="Home" />
+          <NavItem to="/dashboard" icon={Home} label="Home" />
           <NavItem to="/challenges" icon={Trophy} label="Challenges" />
           <NavItem to="/workouts" icon={Dumbbell} label="Workouts" />
           <NavItem to="/diet" icon={Apple} label="Diet" />

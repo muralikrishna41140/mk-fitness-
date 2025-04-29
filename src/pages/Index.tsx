@@ -1,5 +1,5 @@
 
-// This file is now replaced by Dashboard.tsx - we redirect to the Dashboard page
+// This file is now replaced by Dashboard.tsx and LandingPage.tsx
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const Index = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    navigate('/', { replace: true });
+    navigate('/dashboard', { replace: true });
   }, [navigate]);
   
   return null;
