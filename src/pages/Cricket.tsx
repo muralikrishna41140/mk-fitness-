@@ -10,7 +10,8 @@ import CricketTipsSection from '@/components/cricket/CricketTipsSection';
 import PlayerStatsCard from '@/components/cricket/PlayerStatsCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Cricket as CricketIcon, Trophy, Dumbbell, Brain, Apple, Activity } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Activity, Trophy, Dumbbell, Brain, Apple, Activity as ActivityIcon } from 'lucide-react';
 
 const Cricket: React.FC = () => {
   return (
@@ -22,7 +23,7 @@ const Cricket: React.FC = () => {
             <p className="text-gray-500">Specialized training, match insights, and cricket-specific fitness</p>
           </div>
           <div className="hidden md:flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-r from-fitness-purple to-fitness-blue text-white">
-            <CricketIcon className="h-6 w-6" />
+            <Activity className="h-6 w-6" />
           </div>
         </div>
 
@@ -40,7 +41,7 @@ const Cricket: React.FC = () => {
                 </div>
                 <div className="w-1 h-1 rounded-full bg-white/40"></div>
                 <div className="flex items-center gap-1">
-                  <Activity className="h-4 w-4" />
+                  <ActivityIcon className="h-4 w-4" />
                   <span>Live Cricket Data</span>
                 </div>
               </div>

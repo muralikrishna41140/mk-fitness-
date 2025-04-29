@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Cricket, Timer, Award } from 'lucide-react';
+import { Activity, Timer, Award } from 'lucide-react';
 
 const CricketTrainingSection: React.FC = () => {
   // Mock data for cricket training metrics
@@ -48,7 +48,7 @@ const CricketTrainingSection: React.FC = () => {
     {
       title: "Cricket IQ Challenge",
       description: "Test your cricket knowledge with daily trivia questions.",
-      icon: Cricket,
+      icon: Activity,
       progress: 60,
       reward: "Cricket Genius Badge",
     },
@@ -89,8 +89,7 @@ const CricketTrainingSection: React.FC = () => {
                   </div>
                   <Progress 
                     value={(metric.value / metric.goal) * 100} 
-                    className="h-2" 
-                    indicatorClassName={metric.color}
+                    className={`h-2 ${metric.color}`} 
                   />
                 </div>
               </CardContent>
@@ -144,3 +143,4 @@ const CricketTrainingSection: React.FC = () => {
 };
 
 export default CricketTrainingSection;
+
