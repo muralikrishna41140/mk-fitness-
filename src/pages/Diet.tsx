@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import PageLayout from '@/components/layout/PageLayout';
 import MealPlanCard from '@/components/diet/MealPlanCard';
@@ -45,7 +46,8 @@ const Diet: React.FC = () => {
   const handleGenerateDietPlan = async () => {
     setLoading(true);
     try {
-      const response = await generateDietPlan(dietType, calorieGoal, includeSnacks, foodPreferences);
+      // Update to match the service function signature
+      const response = await generateDietPlan(dietType, parseInt(calorieGoal), includeSnacks, foodPreferences);
       setGeneratedDietPlan(response);
       toast.success('Diet plan generated successfully!');
     } catch (error) {
