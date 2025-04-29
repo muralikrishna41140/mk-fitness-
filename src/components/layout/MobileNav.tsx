@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare, Activity } from 'lucide-react';
+import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare, Cricket } from 'lucide-react';
 
 interface MobileNavItemProps {
   to: string;
@@ -30,7 +30,7 @@ const MobileNav: React.FC = () => {
         <MobileNavItem to="/dashboard" icon={Home} label="Home" />
         <MobileNavItem to="/challenges" icon={Trophy} label="Challenges" />
         <MobileNavItem to="/workouts" icon={Dumbbell} label="Workouts" />
-        <MobileNavItem to="/cricket" icon={Activity} label="Cricket" />
+        <MobileNavItem to="/cricket" icon={Cricket} label="Cricket" />
       </div>
     </div>
   );
