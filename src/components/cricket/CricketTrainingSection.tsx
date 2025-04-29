@@ -143,4 +143,3 @@ const CricketTrainingSection: React.FC = () => {
 };
 
 export default CricketTrainingSection;
-
