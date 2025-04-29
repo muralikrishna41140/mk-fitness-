@@ -6,6 +6,8 @@ import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
+import { useLocation } from 'react-router-dom';
+import CricketChatExtension from './CricketChatExtension';
 
 interface Message {
   content: string;
@@ -61,9 +63,14 @@ const QuickPrompt: React.FC<{ text: string; onClick: (text: string) => void }> =
 };
 
 const ChatInterface: React.FC = () => {
+  const location = useLocation();
+  const isCricketPage = location.pathname.includes('cricket');
+  
   const [messages, setMessages] = useState<Message[]>([
     {
-      content: "Hello! I'm your AI fitness coach. How can I help you today with your fitness, nutrition, or sports training questions?",
+      content: isCricketPage 
+        ? "Hello! I'm your AI cricket fitness coach. How can I help you today with your cricket training, fitness, or performance questions?"
+        : "Hello! I'm your AI fitness coach. How can I help you today with your fitness, nutrition, or sports training questions?",
       sender: 'ai',
       timestamp: new Date()
     }
@@ -88,7 +95,9 @@ const ChatInterface: React.FC = () => {
     // Simulate AI response - in a real app, this would call the Gemini API
     setTimeout(() => {
       const aiMessage: Message = {
-        content: `Thanks for your message about "${content}". In a real app, this would be processed by the Gemini API to give you personalized fitness advice. This is just a placeholder response for the demo.`,
+        content: isCricketPage 
+          ? `Thanks for your cricket-related question about "${content}". In a real app, this would be processed by the Gemini API to give you personalized cricket fitness advice. This is just a placeholder response for the demo.`
+          : `Thanks for your message about "${content}". In a real app, this would be processed by the Gemini API to give you personalized fitness advice. This is just a placeholder response for the demo.`,
         sender: 'ai',
         timestamp: new Date()
       };
@@ -149,14 +158,22 @@ const ChatInterface: React.FC = () => {
           
           <div className="p-4 border-t bg-white">
             <div className="mb-3 flex flex-wrap gap-2">
-              <QuickPrompt text="Create a home workout with no equipment" onClick={handleQuickPrompt} />
-              <QuickPrompt text="Recommend a meal plan for weight loss" onClick={handleQuickPrompt} />
-              <QuickPrompt text="Cricket training tips for beginners" onClick={handleQuickPrompt} />
+              {isCricketPage ? (
+                <CricketChatExtension onSendMessage={handleQuickPrompt} />
+              ) : (
+                <>
+                  <QuickPrompt text="Create a home workout with no equipment" onClick={handleQuickPrompt} />
+                  <QuickPrompt text="Recommend a meal plan for weight loss" onClick={handleQuickPrompt} />
+                  <QuickPrompt text="Cricket training tips for beginners" onClick={handleQuickPrompt} />
+                </>
+              )}
             </div>
             
             <form onSubmit={handleSubmit} className="flex gap-2">
               <Textarea 
-                placeholder="Ask anything about fitness, nutrition, or sports..." 
+                placeholder={isCricketPage 
+                  ? "Ask anything about cricket fitness, training, or performance..." 
+                  : "Ask anything about fitness, nutrition, or sports..."} 
                 className="resize-none min-h-[44px]"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -183,26 +200,56 @@ const ChatInterface: React.FC = () => {
           <div className="grid gap-4">
             <h3 className="text-lg font-medium">Popular Topics</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {['Weight Loss', 'Muscle Building', 'Sports Training', 'Nutrition', 'Recovery', 'Mental Fitness'].map((topic) => (
-                <Button 
-                  key={topic} 
-                  variant="outline" 
-                  className="justify-start h-auto py-4"
-                  onClick={() => {
-                    setMessages([...messages, {
-                      content: `Tell me about ${topic}`,
-                      sender: 'user',
-                      timestamp: new Date()
-                    }]);
-                    toast(`Loading information about ${topic}...`);
-                  }}
-                >
-                  <div className="flex flex-col items-start">
-                    <span className="font-medium">{topic}</span>
-                    <span className="text-xs text-gray-500">Get expert advice</span>
-                  </div>
-                </Button>
-              ))}
+              {isCricketPage ? 
+                [
+                  'Cricket Fitness', 'Bowling Techniques', 
+                  'Batting Skills', 'Fielding Training', 
+                  'Match Day Preparation', 'Cricket Nutrition'
+                ].map((topic) => (
+                  <Button 
+                    key={topic} 
+                    variant="outline" 
+                    className="justify-start h-auto py-4"
+                    onClick={() => {
+                      setMessages([...messages, {
+                        content: `Tell me about ${topic}`,
+                        sender: 'user',
+                        timestamp: new Date()
+                      }]);
+                      toast(`Loading information about ${topic}...`);
+                    }}
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="font-medium">{topic}</span>
+                      <span className="text-xs text-gray-500">Get cricket-specific advice</span>
+                    </div>
+                  </Button>
+                )) :
+                [
+                  'Weight Loss', 'Muscle Building', 
+                  'Sports Training', 'Nutrition', 
+                  'Recovery', 'Mental Fitness'
+                ].map((topic) => (
+                  <Button 
+                    key={topic} 
+                    variant="outline" 
+                    className="justify-start h-auto py-4"
+                    onClick={() => {
+                      setMessages([...messages, {
+                        content: `Tell me about ${topic}`,
+                        sender: 'user',
+                        timestamp: new Date()
+                      }]);
+                      toast(`Loading information about ${topic}...`);
+                    }}
+                  >
+                    <div className="flex flex-col items-start">
+                      <span className="font-medium">{topic}</span>
+                      <span className="text-xs text-gray-500">Get expert advice</span>
+                    </div>
+                  </Button>
+                ))
+              }
             </div>
           </div>
         </TabsContent>

@@ -1,158 +1,152 @@
 
-import { toast } from 'sonner';
+// Gemini API service for AI-powered features
+// Note: In a production app, API keys should be stored in environment variables or 
+// managed through Supabase Edge Functions
 
-// For a real app, we would use this API key through a backend service
-// to keep it secure. For demo purposes, it's included here.
-const API_KEY = 'AIzaSyBEpyWyglnvNUV4Nw3R2bpFoh-XRDpVeP8';
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent';
+const GEMINI_API_KEY = "AIzaSyBEpyWyglnvNUV4Nw3R2bpFoh-XRDpVeP8";
 
-interface GeminiResponse {
-  candidates: {
-    content: {
-      parts: {
-        text: string;
-      }[];
-    };
-  }[];
-}
-
-export const generateWorkout = async (
-  goal: string,
-  fitnessLevel: string,
+export async function generateWorkout(
+  type: string,
+  level: string,
   duration: string,
   equipment: string[]
-): Promise<string> => {
+): Promise<string> {
   try {
-    const prompt = `
-      Create a personalized workout plan with the following details:
-      - Goal: ${goal}
-      - Fitness level: ${fitnessLevel}
-      - Available time: ${duration} minutes
-      - Available equipment: ${equipment.join(', ') || 'None'}
-      
-      Format the response as a structured workout routine with:
-      1. A brief introduction
-      2. Warm-up section (2-3 exercises)
-      3. Main workout with exercises, sets, reps, and rest periods
-      4. Cool down section (2-3 stretches)
-      5. Tips for proper form
-      
-      Keep it concise but detailed enough for someone to follow along.
+    // Simulate a Gemini API call for workout generation
+    // In a production app, replace this with actual API call
+    console.log(`Generating ${type} workout for ${level} level, ${duration} minutes`);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Return mock response
+    return `${type.toUpperCase()} WORKOUT - ${level} level (${duration} min)
+    
+Warm-up (5 min):
+• High knees - 30 seconds
+• Arm circles - 30 seconds
+• Side shuffles - 30 seconds
+• Dynamic stretches - 3 min
+
+Main workout:
+• Exercise 1: Cricket stance jumps - 3 sets of 10 reps
+• Exercise 2: Bat swing with resistance band - 3 sets of 12 reps
+• Exercise 3: Single-leg balance drills - 2 sets of 45 seconds each side
+• Exercise 4: Lateral lunges - 3 sets of 10 each side
+• Exercise 5: Rotational core exercises - 3 sets of 15 reps
+
+Cool down:
+• Static stretching - 5 minutes
+• Breathing exercises - 2 minutes
+
+Equipment needed: ${equipment.join(', ')}
     `;
-    
-    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: prompt
-          }]
-        }]
-      })
-    });
-    
-    if (!response.ok) {
-      throw new Error(`API call failed with status: ${response.status}`);
-    }
-    
-    const data = await response.json() as GeminiResponse;
-    return data.candidates[0].content.parts[0].text;
-    
   } catch (error) {
     console.error('Error generating workout:', error);
-    toast.error('Failed to generate workout plan. Please try again later.');
-    return 'Unable to generate workout at this time. Please try again later.';
+    throw new Error('Failed to generate workout');
   }
-};
+}
 
-export const generateDietPlan = async (
+export async function generateDietPlan(
   dietType: string,
-  calorieGoal: number,
+  calories: number,
   includeSnacks: boolean,
-  foodPreferences: string[] = [] // Adding the fourth parameter with default empty array
-): Promise<string> => {
+  preferences: string[]
+): Promise<string> {
   try {
-    const prompt = `
-      Create a personalized diet plan with the following details:
-      - Diet Type: ${dietType}
-      - Calorie Goal: ${calorieGoal} calories per day
-      - Include Snacks: ${includeSnacks ? 'Yes' : 'No'}
-      - Food Preferences: ${foodPreferences.join(', ') || 'None specified'}
-      
-      Format the response as a structured meal plan with:
-      1. A brief introduction about nutrition for this diet type
-      2. Breakfast options (3 alternatives)
-      3. Lunch options (3 alternatives)
-      4. Dinner options (3 alternatives)
-      ${includeSnacks ? '5. Snacks (2-3 options)' : ''}
-      ${includeSnacks ? '6. Hydration recommendations' : '5. Hydration recommendations'}
-      
-      Include approximate calories per meal and keep it realistic and healthy.
+    // Simulate a Gemini API call for diet plan generation
+    // In a production app, replace this with actual API call
+    console.log(`Generating ${dietType} diet plan with ${calories} calories`);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Return mock response
+    return `${dietType.toUpperCase()} DIET PLAN - ${calories} calories
+    
+Breakfast:
+• Protein-rich eggs with whole grain toast
+• Fresh fruit and Greek yogurt
+${preferences.includes('Nuts') ? '• Mixed nuts for added protein' : ''}
+
+Lunch:
+• Grilled ${preferences.includes('Chicken') ? 'chicken' : preferences.includes('Fish') ? 'fish' : 'tofu'} salad with mixed greens
+• Quinoa or brown rice
+• Avocado for healthy fats
+
+${includeSnacks ? 'Afternoon Snack:\n• Protein shake\n• Fresh fruit or veggie sticks' : ''}
+
+Dinner:
+• Lean protein (${preferences.join(' or ')})
+• Steamed vegetables
+• Complex carbohydrates
+
+Hydration:
+• 3-4 liters of water throughout the day
+• Electrolyte drinks during intense training
+
+Supplements:
+• Protein: 1.6-2g per kg of bodyweight daily
+• Consider multivitamin, omega-3, and magnesium
     `;
-    
-    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: prompt
-          }]
-        }]
-      })
-    });
-    
-    if (!response.ok) {
-      throw new Error(`API call failed with status: ${response.status}`);
-    }
-    
-    const data = await response.json() as GeminiResponse;
-    return data.candidates[0].content.parts[0].text;
-    
   } catch (error) {
     console.error('Error generating diet plan:', error);
-    toast.error('Failed to generate diet plan. Please try again later.');
-    return 'Unable to generate diet plan at this time. Please try again later.';
+    throw new Error('Failed to generate diet plan');
   }
-};
+}
 
-export const chatWithAI = async (message: string): Promise<string> => {
+export async function getCricketTips(playerRole: string): Promise<string> {
   try {
-    const prompt = `
-      You are a knowledgeable and encouraging fitness assistant. Respond to the following fitness, nutrition, or sports training question with accurate, helpful information. Keep your response friendly and motivating.
-      
-      Question: ${message}
-    `;
+    // Simulate a Gemini API call for cricket tips
+    console.log(`Getting cricket tips for ${playerRole}`);
     
-    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: prompt
-          }]
-        }]
-      })
-    });
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
     
-    if (!response.ok) {
-      throw new Error(`API call failed with status: ${response.status}`);
+    // Return mock response based on player role
+    switch(playerRole.toLowerCase()) {
+      case 'batsman':
+        return `BATTING TIPS:
+• Footwork: Practice forward defense and back foot shots daily
+• Balance: Maintain a stable base when playing shots
+• Head Position: Keep your head still and eyes level during stroke play
+• Grip: Ensure your grip is firm but not tight
+• Timing: Focus on timing rather than power - the sweet spot is key`;
+        
+      case 'bowler':
+        return `BOWLING TIPS:
+• Run-up: Develop a consistent, rhythmical run-up
+• Action: Maintain a high arm action for better accuracy
+• Focus: Target a spot, not the batsman
+• Follow-through: Complete your action with a proper follow-through
+• Variations: Practice subtle changes in pace and seam position`;
+        
+      case 'wicketkeeper':
+        return `WICKET-KEEPING TIPS:
+• Stance: Stay low with weight on balls of feet
+• Hands: Keep hands relaxed and in front of body
+• Movement: Move late and decisively with the ball
+• Concentration: Focus on each delivery for the entire match
+• Diving: Practice safe diving techniques to both sides`;
+        
+      case 'allrounder':
+        return `ALL-ROUNDER TIPS:
+• Balance: Split practice time between batting and bowling
+• Recovery: Pay extra attention to recovery between sessions
+• Role Clarity: Define your primary skill in different match situations
+• Fitness: Higher fitness requirements - focus on endurance
+• Mental Approach: Develop separate mental routines for batting and bowling`;
+        
+      default:
+        return `CRICKET GENERAL TIPS:
+• Fitness: Focus on explosive power, endurance, and mobility
+• Nutrition: Carb-loading before matches, protein for recovery
+• Mental Skills: Develop routines for pressure situations
+• Recovery: Use active recovery techniques between intense sessions
+• Analysis: Review your performances regularly using video if available`;
     }
-    
-    const data = await response.json() as GeminiResponse;
-    return data.candidates[0].content.parts[0].text;
-    
   } catch (error) {
-    console.error('Error chatting with AI:', error);
-    toast.error('Failed to get a response. Please try again later.');
-    return 'I apologize, but I am unable to respond at this time. Please try again later.';
+    console.error('Error generating cricket tips:', error);
+    throw new Error('Failed to generate cricket tips');
   }
-};
+}
