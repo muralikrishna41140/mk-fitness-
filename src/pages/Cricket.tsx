@@ -10,7 +10,8 @@ import CricketTipsSection from '@/components/cricket/CricketTipsSection';
 import PlayerStatsCard from '@/components/cricket/PlayerStatsCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Cricket as CricketIcon, Trophy, Dumbbell, Brain, Apple, Activity } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Activity as CricketIcon, Trophy, Dumbbell, Brain, Apple, Activity } from 'lucide-react';
 
 const Cricket: React.FC = () => {
   return (
