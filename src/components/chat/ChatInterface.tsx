@@ -1,12 +1,13 @@
 
 import React, { useState } from 'react';
-import { Send, User } from 'lucide-react';
+import { Send, User, RefreshCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { useLocation } from 'react-router-dom';
+import { generateWorkout, generateDietPlan, getCricketTips } from '@/services/geminiApi';
 
 interface Message {
   content: string;
@@ -39,7 +40,7 @@ const ChatMessage: React.FC<{ message: Message }> = ({ message }) => {
             ? 'bg-white border border-gray-200 text-gray-800' 
             : 'bg-fitness-purple text-white'
         }`}>
-          <p className="text-sm">{message.content}</p>
+          <p className="text-sm whitespace-pre-wrap">{message.content}</p>
           <div className={`text-xs mt-1 ${isAi ? 'text-gray-500' : 'text-white/70'}`}>
             {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           </div>
@@ -84,21 +85,64 @@ const ChatInterface: React.FC = () => {
       timestamp: new Date()
     };
     
-    setMessages([...messages, userMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
     setLoading(true);
     
-    // Simulate AI response - in a real app, this would call the Gemini API
-    setTimeout(() => {
+    try {
+      // Determine the type of request based on content keywords
+      let response = "";
+      
+      if (content.toLowerCase().includes("workout") || 
+          content.toLowerCase().includes("exercise") ||
+          content.toLowerCase().includes("train")) {
+        response = await generateWorkout(
+          content.includes("strength") ? "strength" : "cardio",
+          content.includes("beginner") ? "beginner" : "intermediate",
+          "30",
+          ["resistance bands", "dumbbells"]
+        );
+      } else if (content.toLowerCase().includes("diet") || 
+                content.toLowerCase().includes("nutrition") ||
+                content.toLowerCase().includes("food") ||
+                content.toLowerCase().includes("meal")) {
+        response = await generateDietPlan(
+          content.includes("vegan") ? "vegan" : "balanced",
+          2000,
+          true,
+          ["Chicken", "Fish", "Nuts"]
+        );
+      } else {
+        // Generic response using workout generator as fallback
+        response = await generateWorkout(
+          "general",
+          "intermediate", 
+          "30",
+          ["body weight"]
+        );
+      }
+
       const aiMessage: Message = {
-        content: `Thanks for your message about "${content}". In a real app, this would be processed by the Gemini API to give you personalized fitness advice. This is just a placeholder response for the demo.`,
+        content: response,
         sender: 'ai',
         timestamp: new Date()
       };
       
       setMessages(prev => [...prev, aiMessage]);
+    } catch (error) {
+      console.error("Error getting AI response:", error);
+      toast.error("Failed to generate response. Please try again.");
+      
+      const errorMessage: Message = {
+        content: "I'm sorry, I encountered an error generating a response. Please try again.",
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const handleQuickPrompt = (text: string) => {
@@ -110,14 +154,33 @@ const ChatInterface: React.FC = () => {
     sendMessage();
   };
 
+  const startNewChat = () => {
+    setMessages([{
+      content: "Hello! I'm your AI fitness coach. How can I help you today with your fitness, nutrition, or sports training questions?",
+      sender: 'ai',
+      timestamp: new Date()
+    }]);
+    toast.success("Started a new conversation");
+  };
+
   return (
     <Card className="h-full flex flex-col overflow-hidden">
       <Tabs defaultValue="chat" className="flex flex-col h-full">
-        <div className="px-4 py-2 border-b">
+        <div className="px-4 py-2 border-b flex justify-between items-center">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="chat">Chat</TabsTrigger>
             <TabsTrigger value="explore">Explore</TabsTrigger>
           </TabsList>
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={startNewChat} 
+            title="Start a new chat"
+            className="ml-2"
+          >
+            <RefreshCcw className="h-4 w-4" />
+          </Button>
         </div>
         
         <TabsContent value="chat" className="flex-1 flex flex-col overflow-hidden m-0 border-none">
@@ -201,7 +264,7 @@ const ChatInterface: React.FC = () => {
                       sender: 'user',
                       timestamp: new Date()
                     }]);
-                    toast(`Loading information about ${topic}...`);
+                    sendMessage(`Tell me about ${topic}`);
                   }}
                 >
                   <div className="flex flex-col items-start">
