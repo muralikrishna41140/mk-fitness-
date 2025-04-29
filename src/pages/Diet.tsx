@@ -46,7 +46,7 @@ const Diet: React.FC = () => {
   const handleGenerateDietPlan = async () => {
     setLoading(true);
     try {
-      // Update to match the service function signature
+      // Now the function call matches the updated signature
       const response = await generateDietPlan(dietType, parseInt(calorieGoal), includeSnacks, foodPreferences);
       setGeneratedDietPlan(response);
       toast.success('Diet plan generated successfully!');

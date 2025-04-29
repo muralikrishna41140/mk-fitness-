@@ -1,3 +1,4 @@
+
 import { toast } from 'sonner';
 
 // For a real app, we would use this API key through a backend service
@@ -68,24 +69,26 @@ export const generateWorkout = async (
 };
 
 export const generateDietPlan = async (
-  preferences: string,
-  goal: string,
-  allergies: string[]
+  dietType: string,
+  calorieGoal: number,
+  includeSnacks: boolean,
+  foodPreferences: string[] = [] // Adding the fourth parameter with default empty array
 ): Promise<string> => {
   try {
     const prompt = `
       Create a personalized diet plan with the following details:
-      - Dietary preferences: ${preferences}
-      - Goal: ${goal}
-      - Allergies/restrictions: ${allergies.join(', ') || 'None'}
+      - Diet Type: ${dietType}
+      - Calorie Goal: ${calorieGoal} calories per day
+      - Include Snacks: ${includeSnacks ? 'Yes' : 'No'}
+      - Food Preferences: ${foodPreferences.join(', ') || 'None specified'}
       
       Format the response as a structured meal plan with:
-      1. A brief introduction about nutrition for this goal
+      1. A brief introduction about nutrition for this diet type
       2. Breakfast options (3 alternatives)
       3. Lunch options (3 alternatives)
       4. Dinner options (3 alternatives)
-      5. Snacks (2-3 options)
-      6. Hydration recommendations
+      ${includeSnacks ? '5. Snacks (2-3 options)' : ''}
+      ${includeSnacks ? '6. Hydration recommendations' : '5. Hydration recommendations'}
       
       Include approximate calories per meal and keep it realistic and healthy.
     `;
