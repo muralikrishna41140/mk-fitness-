@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare } from 'lucide-react';
+import { Home, Trophy, Dumbbell, Apple, BookOpen, MessageSquare, Cricket } from 'lucide-react';
 
 interface SidebarLinkProps {
   to: string;
@@ -34,6 +34,7 @@ const Sidebar: React.FC = () => {
         <SidebarLink to="/diet" icon={Apple} label="Diet Plans" />
         <SidebarLink to="/blogs" icon={BookOpen} label="Fitness Blog" />
         <SidebarLink to="/chat" icon={MessageSquare} label="AI Coach" />
+        <SidebarLink to="/cricket" icon={Cricket} label="Cricket Zone" />
       </div>
       
       <div className="mt-auto">
