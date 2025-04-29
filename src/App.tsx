@@ -10,7 +10,6 @@ import Workouts from "./pages/Workouts";
 import Diet from "./pages/Diet";
 import Blogs from "./pages/Blogs";
 import Chat from "./pages/Chat";
-import Cricket from "./pages/Cricket";
 import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
 
@@ -30,7 +29,6 @@ const App = () => (
           <Route path="/diet" element={<Diet />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/cricket" element={<Cricket />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
