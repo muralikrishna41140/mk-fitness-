@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import PageLayout from '@/components/layout/PageLayout';
 import WelcomeCard from '@/components/dashboard/WelcomeCard';
 import StatsCard from '@/components/dashboard/StatsCard';
@@ -13,10 +11,6 @@ import { Link } from 'react-router-dom';
 const Dashboard: React.FC = () => {
   return (
     <PageLayout>
-      <Helmet>
-        <title>Dashboard | FitForge</title>
-      </Helmet>
-      
       <div className="space-y-6">
         <WelcomeCard />
         

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import PageLayout from '@/components/layout/PageLayout';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -85,10 +84,6 @@ const BlogPost: React.FC<BlogPostProps> = ({
 const Blogs: React.FC = () => {
   return (
     <PageLayout>
-      <Helmet>
-        <title>Fitness Blog | FitForge</title>
-      </Helmet>
-      
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold">Fitness Blog</h1>

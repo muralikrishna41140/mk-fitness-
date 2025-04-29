@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import PageLayout from '@/components/layout/PageLayout';
 import ChallengeCard from '@/components/challenges/ChallengeCard';
 import { Button } from '@/components/ui/button';
@@ -10,10 +8,6 @@ import { Plus } from 'lucide-react';
 const Challenges: React.FC = () => {
   return (
     <PageLayout>
-      <Helmet>
-        <title>Challenges | FitForge</title>
-      </Helmet>
-      
       <div className="space-y-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
