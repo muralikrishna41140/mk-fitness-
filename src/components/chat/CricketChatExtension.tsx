@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Cricket, Dumbbell, Star, Calendar } from 'lucide-react';
+import { Activity, Dumbbell, Star, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface CricketChatExtensionProps {
@@ -11,7 +11,7 @@ const CricketChatExtension: React.FC<CricketChatExtensionProps> = ({ onSendMessa
   const cricketQuestions = [
     {
       text: "What's the best warm-up routine before bowling?",
-      icon: Cricket,
+      icon: Activity,
       category: "bowling"
     },
     {
