@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import PageLayout from '@/components/layout/PageLayout';
 import MealPlanCard from '@/components/diet/MealPlanCard';
 import { Button } from '@/components/ui/button';
@@ -25,6 +24,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { generateDietPlan } from '@/services/geminiApi';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Helmet } from 'react-helmet';
 
 const Diet: React.FC = () => {
   const [loading, setLoading] = useState(false);
